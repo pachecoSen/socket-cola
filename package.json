@@ -1,0 +1,36 @@
+{
+  "name": "socket-cola",
+  "version": "1.0.0",
+  "description": "Proyecto socket cola",
+  "main": "./server",
+  "scripts": {
+    "start": "node ./server",
+    "developer": "nodemon ./server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pachecoSen/socket-cola.git"
+  },
+  "keywords": [
+    "socket",
+    "nodejs",
+    "node",
+    "cola"
+  ],
+  "author": "Ignacio Pacheco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pachecoSen/socket-cola/issues"
+  },
+  "homepage": "https://github.com/pachecoSen/socket-cola#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "morgan": "^1.9.1",
+    "socket.io": "^2.3.0",
+    "terminal-kit": "^1.31.6"
+  }
+}
