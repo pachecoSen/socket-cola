@@ -4,6 +4,9 @@ const socketIO = require('socket.io'),
     {green:success, blue:info} = require( 'terminal-kit' ).terminal,
     {resolve} = require('path');
 
+const Ticket = require(resolve(__dirname, '../classes/ticket'));
+const newTicket = new Ticket();
+
 module.exports = server => {
     success('... OK!\n\n')
     const io = socketIO(server);
@@ -15,7 +18,7 @@ module.exports = server => {
             'msg' : 'Bienvenido a la aplicacion'
         });
 
-        ['bienvenida', 'chat'].forEach(s => require(resolve(__dirname, './componentes/', s))(cliente));
+        require(resolve(__dirname, './components'))(cliente);
         
         cliente.on('disconnect', () => {
             info('socket>>> Cliente desconectado\n');
