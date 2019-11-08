@@ -5,16 +5,16 @@ const {green:success, red:error} = require( 'terminal-kit' ).terminal,
 
 const path = require(resolve(__dirname, './../../../config/path'));
 
-const logs = path('logs');
+const logs = require(path('logs'));
 
-const routes = ['redirect'];
+const middlewares = ['redirect'];
 
-module.exports = app => routes.forEach(r => {
+module.exports = app => middlewares.forEach(r => {
     try {
         require(`./${ r }`)(app);
-        success(`Route '${ r }' loaded successfully \n`);
+        success(`middleware '${r}' loaded successfully \n`);
     } catch (err) {
         logs('path', err);
-        error(`Route '${ r }' not loaded \n`);
+        error(`middleware '${r}' not loaded \n`);
     }
 });

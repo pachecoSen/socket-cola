@@ -67,3 +67,6 @@ typings/
 
 # otros
 package-lock.json
+
+# CSS Make
+public/css/*.css

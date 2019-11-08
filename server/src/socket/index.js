@@ -4,7 +4,9 @@ const socketIO = require('socket.io'),
     {green:success, blue:info} = require( 'terminal-kit' ).terminal,
     {resolve} = require('path');
 
-const Ticket = require(resolve(__dirname, '../classes/ticket'));
+const path = require(resolve(__dirname,'./../../config/path'));
+
+const Ticket = require(resolve(path('clases'), 'ticket'));
 const newTicket = new Ticket();
 
 module.exports = server => {

@@ -1,18 +1,48 @@
 "use strict";
 
-const {resolve} = require('path');
+const {resolve} = require('path'),
+    {writeFileSync} = require('fs'),
+    {blue:info} = require( 'terminal-kit' ).terminal;
 
-const SqLite = require(resolve(__dirname, '../db/sqlite'));
-const conn = new SqLite();
+const path = require(resolve(__dirname, './../../config/path'));
+
+const fileData = resolve(path('logs'), 'SAVE.ticket.json');
+
+const date = new Date();
+
+const data = require(fileData);
+
 
 class Ticket{
     constructor() {
-        try {
-            conn.setPath(resolve(__dirname, '../db/ticket.db')).open().select('select * from oldTicket');   
-        } catch (error) {
-            this.ultimo = 0;
-            this.hoy = new Date().getDate();   
+        this.ultimo = 0;
+        this.hoy = `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`;
+        
+        if(data.hoy === this.hoy){
+            this.ultimo = data.ultimo;
+
+            return false;
         }
+        
+        this.reset();
+    }
+
+    siguiente(){
+        this.ultimo += 1;
+        this.save();
+
+        return this.ultimo;
+    }
+
+    reset(){
+        this.ultimo = 0;
+        this.save();
+        info('\nticket >>> Se reinicio sistema\n')
+    }
+
+    save(){
+        writeFileSync(fileData, JSON.stringify({'hoy' : this.hoy, 'ultimo' : this.ultimo}));
+        info('\nticket >>> Datos guardados\n')
     }
 }
 
