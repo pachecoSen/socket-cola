@@ -27,6 +27,10 @@ class Ticket{
         this.reset();
     }
 
+    ultimoTicket(){
+        return this.ultimo;
+    }
+
     siguiente(){
         this.ultimo += 1;
         this.save();

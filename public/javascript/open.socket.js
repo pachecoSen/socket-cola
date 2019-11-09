@@ -17,15 +17,14 @@ function loadIO(){
     
         socket.on('welcome', function(msg){
             console.info(msg);
-        
             socket.emit('done', {
                 'estatus' : true,
                 'user' : 'Pacheco'
             }, function(res){
                 if(true === res.est){
-                    if(typeof chat === "function"){
+                    if(typeof newTicket === "function"){
                         // eslint-disable-next-line no-undef
-                        chat(socket);
+                        newTicket(socket);
                         
                         return false;
                     }

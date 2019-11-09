@@ -1,12 +1,8 @@
 "use strict";
 
-const {resolve} = require('path'),
-    {red:error} = require( 'terminal-kit' ).terminal,
-    {stat} = require('fs');
+const {resolve} = require('path');
 
 const path = require(resolve(__dirname, './../../../config/path'));
-
-const logs = require(path('logs'));
 
 module.exports = app => {
     app.get('/get/socket', (req, res) => res.status(301).redirect('/socket.io/socket.io.js'));

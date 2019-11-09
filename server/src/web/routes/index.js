@@ -5,13 +5,13 @@ const {green:success, red:error} = require( 'terminal-kit' ).terminal,
 
 const path = require(resolve(__dirname, './../../../config/path'));
 
-const logs = path('logs');
+const logs = require(path('logs'));
 
 const routes = ['redirect'];
 
 module.exports = app => routes.forEach(r => {
     try {
-        require(`./${ r }`)(app);
+        require(`./${r}`)(app);
         success(`Route '${ r }' loaded successfully \n`);
     } catch (err) {
         logs('path', err);

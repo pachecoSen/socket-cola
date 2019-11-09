@@ -12,6 +12,10 @@ const less = new Less();
 module.exports = app => {
     app.use('/get/css/:file', (req, res, next) => {
         const {file} = req.params;
+        const pathCSS = resolve(path('css'), `./${file}.css`);
+        if(true === pathCSS)
+            return next();
+
         const pathLess = resolve(path('less'), `./${file}.less`);
         if(false === existsSync(pathLess))
             return  res.status(404).json({
