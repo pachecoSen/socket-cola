@@ -5,32 +5,22 @@ const {red:error} = require( 'terminal-kit' ).terminal,
 
 const path = require(resolve(__dirname,'./../../../config/path'));
 
-const Ticket = require(resolve(path('clases'), 'ticket'));
-const newTicket = new Ticket();
+const ControlTicket = require(resolve(path('clases'), 'ticket'));
+const controlTicket = new ControlTicket();
 
 const logs = require(path('logs'));
 
 module.exports = cliente =>{
-    cliente.on('ultimoTicket', (msg, callback) => {
-        try {
-            const ticket = newTicket.ultimoTicket();
-            console.log(ticket);
-            callback({
-                'est' : true,
-                'msg' : ticket
-            });
-        } catch (err) {
-            console.log(err);
-            
-            callback({ 'est' : false });
-            logs('socket', err);
-            error('socket >>> Fallo de comunicacion\n');
+    cliente.emit('ultimoTicket', {
+        'est' : true,
+        'msg' : {
+            'actual': controlTicket.ultimoTicket()
         }
     });
 
     cliente.on('sigTicket', (msg, callback) =>{
         try {
-            const ticket = newTicket.siguiente();
+            const ticket = controlTicket.siguiente();
             callback({
                 'est' : true,
                 'msg' : ticket

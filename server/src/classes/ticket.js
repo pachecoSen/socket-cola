@@ -12,11 +12,19 @@ const date = new Date();
 
 const data = require(fileData);
 
-
 class Ticket{
+    constructor(int_numero, int_escritorio) {
+        this.numero = int_numero;
+        this.escritorio = int_escritorio;
+    }
+}
+
+
+class ControlTicket{
     constructor() {
         this.ultimo = 0;
         this.hoy = `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`;
+        this.tickets = [];
         
         if(data.hoy === this.hoy){
             this.ultimo = data.ultimo;
@@ -33,6 +41,7 @@ class Ticket{
 
     siguiente(){
         this.ultimo += 1;
+        this.tickets.push(new Ticket(this.ultimo, null));
         this.save();
 
         return this.ultimo;
@@ -40,14 +49,15 @@ class Ticket{
 
     reset(){
         this.ultimo = 0;
+        this.tickets = [];
         this.save();
         info('\nticket >>> Se reinicio sistema\n')
     }
 
     save(){
-        writeFileSync(fileData, JSON.stringify({'hoy' : this.hoy, 'ultimo' : this.ultimo}));
+        writeFileSync(fileData, JSON.stringify({'hoy' : this.hoy, 'ultimo' : this.ultimo, 'cola' : this.tickets}));
         info('\nticket >>> Datos guardados\n')
     }
 }
 
-module.exports = Ticket;
+module.exports = ControlTicket;

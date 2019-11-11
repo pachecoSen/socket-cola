@@ -22,14 +22,8 @@ function loadIO(){
                 'user' : 'Pacheco'
             }, function(res){
                 if(true === res.est){
-                    if(typeof newTicket === "function"){
-                        // eslint-disable-next-line no-undef
-                        newTicket(socket);
-                        
-                        return false;
-                    }
-        
-                    console.error("Funcion 'chat' no encontrada");
+                    console.info("Comunicacion exitosa");
+
                     return false;
                 }
         
