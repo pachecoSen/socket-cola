@@ -12,6 +12,7 @@ const coleccionPath = {
     'js' : resolve(__dirname, './../../public/javascript'),
     'css' : resolve(__dirname, './../../public/css'),
     'less' : resolve(__dirname, './../../public/less'),
+    'ico' :resolve(__dirname, './../../public/img/icons')
 }
 
 module.exports = path => {

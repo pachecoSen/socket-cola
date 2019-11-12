@@ -22,6 +22,6 @@ module.exports = app => {
                 'err' : `File ${file} not exists`
             });
 
-        less.setInput(pathLess).setOutput(resolve(path('css'), `./${file}.css`)).make(ruta => true == existsSync(ruta) ? next() : res.status(500).send('Error de sistema'));
+        less.setInput(pathLess).setCompress(true).setOutput(resolve(path('css'), `./${file}.min.css`)).make(ruta => true == existsSync(ruta) ? next() : res.status(500).send('Error de sistema'));
     });
 }
