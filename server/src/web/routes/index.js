@@ -7,7 +7,7 @@ const path = require(resolve(__dirname, './../../../config/path'));
 
 const logs = require(path('logs'));
 
-const routes = ['redirect'];
+const routes = ['redirect', 'ticket'];
 
 module.exports = app => routes.forEach(r => {
     try {
