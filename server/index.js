@@ -1,31 +1,18 @@
 "use strict";
 
 const { resolve } = require('path'),
-    {green:success, red:error} = require( 'terminal-kit' ).terminal,
-    cluster = require('cluster'),
-	os = require('os');
+    {green:success} = require( 'terminal-kit' ).terminal;
 
 const path = require(resolve(__dirname, '../server/config/path'));
 
 const {port} = require(path('config')),
-    server = require(path('server')),
-    socket = require(path('socket'));
+server = require(path('server')),
+socket = require(path('socket'));
 
-if(cluster.isMaster){
-    for(let c = 0; c < os.cpus().length; c++)
-        cluster.fork();
-}
-else{
-    server.listen(port, (err) => {
-        if (err) throw new Error(err);
-    
-        success(`\n\n\n\n\nServer started on port: ${ port }\n`);
-        success(`Iniciando Socket...`);
-        socket(server);
-    });
-}
+server.listen(port, (err) => {
+    if (err) throw new Error(err);
 
-cluster.on('exit', worker => {
-	error(`Proceso ${worker.id}, Finalizo`);
-	worker.fork();
+    success(`\n\n\n\n\nServer started on port: ${ port }\n`);
+    success(`Iniciando Socket...`);
+    socket(server);
 });
